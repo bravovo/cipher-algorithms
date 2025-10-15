@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+    <%- include('./includes/navigation.ejs') %>
+        <main>
+            <div class="form-container">
+                <form action="/gronsfeld/decrypt" method="POST" class="form">
+                    <div class="form-item"><label for="message">Зашифроване повідомлення</label>
+                        <textarea name="message" id=""></textarea>
+                    </div>
+                    <div class="form-item"><label for="key">Ключ</label>
+                        <input type="number" name="key">
+                    </div>
+                    <input type="hidden" name="alphabet" value="<%= alphabet %>">
+                    <button type="submit">Розшифрувати</button>
+                </form>
+            </div>
+            <div class="">
+                <table>
+                    <tbody>
+                        <tr>
+                            <% for( let i=0; i < encrypted.length; i++ ) { %>
+                                <td>
+                                    <%= encrypted.charAt(i) %>
+                                </td>
+                                <% } %>
+                        </tr>
+                        <tr>
+                            <% for( let i=0; i < keys.length; i++ ) { %>
+                                <td>
+                                    <%= keys[i] %>
+                                </td>
+                                <% } %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="">
+                <h2>Зашифроване повідомлення: <%= encrypted %>
+                </h2>
+                <h2>Ключ: <%= rawKeys.join('') %>
+                </h2>
+            </div>
+        </main>
+</body>
+
+</html>

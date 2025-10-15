@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+    <%- include('./includes/navigation.ejs') %>
+        <main>
+            <div class="form-container">
+                <form action="/gronsfeld/encrypt" method="POST" class="form">
+                    <div class="form-item"><label for="message">Повідомлення</label>
+                        <textarea name="message" id=""></textarea>
+                    </div>
+                    <div class="form-item"><label for="key">Ключ</label>
+                        <input type="number" name="key">
+                    </div>
+                    <div class="form-item form-item-alph"><strong>Алфавіт</strong>
+
+                        <label for="ua"><input type="radio" name="alphabet" value="ua">Український</label>
+
+                        <label for="ua"><input type="radio" name="alphabet" value="eng">Англійський</label>
+                    </div>
+                    <button type="submit">Шифрувати</button>
+                </form>
+            </div>
+            <% if (decrypted) { %>
+                <div class="">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <% for( let i=0; i < decrypted.length; i++ ) { %>
+                                    <td>
+                                        <%= decrypted.charAt(i) %>
+                                    </td>
+                                    <% } %>
+                            </tr>
+                            <tr>
+                                <% for( let i=0; i < keys.length; i++ ) { %>
+                                    <td>
+                                        <%= keys[i] %>
+                                    </td>
+                                    <% } %>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="">
+                    <h2>Розшифроване повідомлення: <%= decrypted %>
+                    </h2>
+                    <h2>Ключ: <%= rawKeys.join('') %>
+                    </h2>
+                </div>
+                <% } %>
+        </main>
+</body>
+
+</html>
