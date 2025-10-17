@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+    <%- include('./includes/navigation.ejs') %>
+        <main>
+            <% if (!error) { %>
+                <div class="form-container">
+                    <form action="/double-playfair/decrypt" method="POST" class="form">
+                        <div class="form-item">
+                            <label for="message">Зашифроване повідомлення</label>
+                            <textarea name="message" id=""></textarea>
+                        </div>
+                        <div class="form-item">
+                            <label for="key1">Ключ 1</label>
+                            <input type="text" name="key1">
+                        </div>
+                        <div class="form-item">
+                            <label for="key2">Ключ 2</label>
+                            <input type="text" name="key2">
+                        </div>
+                        <input type="hidden" name="alphabet" value="<%= alphabet %>">
+                        <button type="submit">Розшифрувати</button>
+                    </form>
+                </div>
+                <div class="double-tables">
+                    <table>
+                        <tbody>
+                            <% for(let i=0; i < matrix1.rows; i++) { %>
+                                <tr>
+                                    <% for( let j=0; j < matrix1.cols; j++ ) { %>
+                                        <td>
+                                            <%= matrix1.matrix[i][j]==='i' ? 'i/j' : matrix1.matrix[i][j] %>
+                                        </td>
+                                        <% } %>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                    </table>
+                    <table>
+                        <tbody>
+                            <% for(let i=0; i < matrix2.rows; i++) { %>
+                                <tr>
+                                    <% for( let j=0; j < matrix2.cols; j++ ) { %>
+                                        <td>
+                                            <%= matrix2.matrix[i][j]==='i' ? 'i/j' : matrix2.matrix[i][j] %>
+                                        </td>
+                                        <% } %>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="">
+                    <h2>Зашифроване повідомлення: <%= encrypted %>
+                    </h2>
+                    <h2>Ключ 1: <%= key1 %>
+                    </h2>
+                    <h2>Ключ 2: <%= key2 %>
+                    </h2>
+                </div>
+                <% } else { %>
+                    <h1>
+                        <%= errorMessage %>
+                    </h1>
+                    <% } %>
+        </main>
+</body>
+
+</html>

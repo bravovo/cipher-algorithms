@@ -5,6 +5,7 @@ const path = require("path");
 const polybiusRouter = require("./routes/polybius");
 const gronsfeldRouter = require("./routes/gronsfeld");
 const doublePlayfairRouter = require("./routes/doublePlayfair");
+const vernamRouter = require("./routes/vernam");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,6 +17,7 @@ app.set("views", "views");
 app.use("/polybius", polybiusRouter);
 app.use("/gronsfeld", gronsfeldRouter);
 app.use("/double-playfair", doublePlayfairRouter);
+app.use("/vernam", vernamRouter);
 
 app.get("/", (req, res) => {
     res.render("index", {

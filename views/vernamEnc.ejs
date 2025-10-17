@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+    <%- include('./includes/navigation.ejs') %>
+        <main>
+            <% if (!error) { %>
+                <div class="form-container">
+                    <form action="/vernam/encrypt" method="POST" class="form">
+                        <div class="form-item">
+                            <label for="message">Повідомлення</label>
+                            <textarea name="message" id=""></textarea>
+                        </div>
+                        <div class="form-item">
+                            <label for="key1">Ключ</label>
+                            <input type="text" name="key">
+                        </div>
+                        <button type="submit">Шифрувати</button>
+                    </form>
+                </div>
+                <% if (decrypted.decryptedText) { %>
+                    <div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 0;">Зашифроване повідомлення</td>
+                                    <% for( let i=0; i < decrypted.textBin.length; i++ ) { %>
+                                        <td style="padding: 0;">
+                                            <%= decrypted.textBin.charAt(i) %>
+                                        </td>
+                                        <% } %>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0;">Зашифрований ключ</td>
+                                    <% for( let i=0; i < decrypted.keyBin.length; i++ ) { %>
+                                        <td style="padding: 0;">
+                                            <%= decrypted.keyBin.charAt(i) %>
+                                        </td>
+                                        <% } %>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="">
+                        <h2>Розшифроване повідомлення: <%= decrypted.decryptedText %>
+                        </h2>
+                        <h2>Ключ: <%= key %>
+                        </h2>
+                    </div>
+                    <% } %>
+                        <% } else {%>
+                            <h1>
+                                <%= errorMessage %>
+                            </h1>
+                            <% } %>
+        </main>
+</body>
+
+</html>

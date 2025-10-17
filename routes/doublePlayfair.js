@@ -5,8 +5,8 @@ const router = new Router();
 
 router.get("/", doublePlayfairController.getDoublePlayfair);
 
-router.post("encrypt", doublePlayfairController.postEncrypt);
+router.post("/encrypt", doublePlayfairController.postEncrypt);
 
-router.post("decrypt", doublePlayfairController.postDecrypt);
+router.post("/decrypt", doublePlayfairController.postDecrypt);
 
 module.exports = router;
